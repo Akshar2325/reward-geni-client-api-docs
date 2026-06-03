@@ -83,6 +83,27 @@
   if (sidebarClose) sidebarClose.addEventListener("click", closeSidebar);
   if (sidebarOverlay) sidebarOverlay.addEventListener("click", closeSidebar);
 
+  document.querySelectorAll(".postman-download").forEach(function (btn) {
+    btn.addEventListener("click", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      var fileUrl = btn.getAttribute("data-download-url");
+      if (!fileUrl) return;
+
+      var fileName =
+        btn.getAttribute("data-download-filename") || "postman_collection.json";
+
+      var link = document.createElement("a");
+      link.href = fileUrl;
+      link.download = fileName;
+      link.style.display = "none";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+    });
+  });
+
   // Close sidebar when clicking a nav link on mobile
   document.querySelectorAll(".sidebar .nav-link").forEach(function (link) {
     link.addEventListener("click", function () {
@@ -649,11 +670,12 @@
     var href = link.getAttribute("href");
     if (!href) return;
 
-    // Skip pure anchors, external links, javascript, and new-tab links
+    // Skip pure anchors, external links, javascript, new-tab links, and downloads
     if (
       href.startsWith("#") ||
       href.startsWith("javascript") ||
-      link.target === "_blank"
+      link.target === "_blank" ||
+      link.hasAttribute("download")
     )
       return;
     if (href.startsWith("http") && !href.includes(window.location.hostname))
