@@ -394,8 +394,14 @@ body {
 .topbar-actions {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 16px;
     margin-left: auto;
+}
+
+.postman-download {
+    height: 32px;
+    padding: 0 16px;
+    font-size: 13px;
 }
 
 .theme-toggle {
@@ -416,20 +422,6 @@ body {
 
 [data-theme="light"] .moon-icon { display: none; }
 [data-theme="dark"]  .sun-icon  { display: none; }
-
-.github-link {
-    display: flex;
-    align-items: center;
-    padding: 0;
-    width: 36px;
-    height: 36px;
-    justify-content: center;
-    color: var(--text-secondary);
-    border: 1px solid var(--hairline);
-    border-radius: var(--radius-pill);
-    transition: all 0.15s ease;
-}
-.github-link:hover { color: var(--text-primary); background: var(--bg-hover); border-color: var(--accent); }
 
 /* ============================================
    Content
@@ -569,12 +561,12 @@ h4 {
 
 p { margin-bottom: 14px; color: var(--text-secondary); font-size: 16px; line-height: 1.55; }
 
-a:not(.btn):not(.nav-link):not(.search-result-item):not(.logo-link):not(.github-link):not(.footer-links a):not(.feature-link) {
+a:not(.btn):not(.nav-link):not(.search-result-item):not(.logo-link):not(.footer-links a):not(.feature-link) {
     color: var(--text-link);
     text-decoration: none;
     transition: color 0.15s;
 }
-a:not(.btn):not(.nav-link):not(.search-result-item):not(.logo-link):not(.github-link):not(.footer-links a):not(.feature-link):hover {
+a:not(.btn):not(.nav-link):not(.search-result-item):not(.logo-link):not(.footer-links a):not(.feature-link):hover {
     color: var(--text-link-hover);
 }
 
