@@ -7,6 +7,10 @@ updates:
       day: monday
       time: "04:00"
       timezone: "Asia/Kolkata"
+    groups:
+      github-actions-all:
+        patterns:
+          - "*"
     open-pull-requests-limit: 5
     commit-message:
       prefix: chore
