@@ -1,0 +1,170 @@
+[
+  {
+    "title": "Overview — Reward Geni Client Exchange API",
+    "section": "Home",
+    "url": "index.html",
+    "content": "Reward Geni Client Exchange API documentation. Base URL, credentials, endpoints overview, error codes. Authentication, user management, batch operations.",
+    "keywords": "overview home introduction base url credentials error codes"
+  },
+  {
+    "title": "Base URL",
+    "section": "Home",
+    "url": "index.html#base-url",
+    "content": "All API requests should be made to https://staging.rewardgenix.co.in",
+    "keywords": "base url endpoint staging production"
+  },
+  {
+    "title": "Endpoints Overview",
+    "section": "Home",
+    "url": "index.html#endpoints-overview",
+    "content": "POST /clientapi/generate-token, POST /clientapi/users, PUT /clientapi/users, GET /clientapi/users",
+    "keywords": "endpoints list routes api methods"
+  },
+  {
+    "title": "Your Credentials",
+    "section": "Home",
+    "url": "index.html#credentials",
+    "content": "cxClientId, cxClientSecret, cxApiSecret. Store credentials securely. Shown only once at creation time.",
+    "keywords": "credentials client id secret api secret authentication keys"
+  },
+  {
+    "title": "Error Codes",
+    "section": "Home",
+    "url": "index.html#error-codes",
+    "content": "ER_401_101 invalid expired token, ER_401_102 missing client headers, ER_401_103 invalid api secret, ER_403_001 IP not whitelisted, ER_400_001 missing fields, ER_400_002 invalid format, ER_400_003 empty users, ER_400_004 unknown status, ERR_429_001 rate limit, ER_500_001 server error",
+    "keywords": "error codes status http 400 401 403 429 500 validation authentication rate limit"
+  },
+  {
+    "title": "Getting Started — Quick Start",
+    "section": "Getting Started",
+    "url": "docs/getting-started.html",
+    "content": "Quick start guide for Reward Geni API. Prerequisites, authentication flow, generate token, first API call, create user example.",
+    "keywords": "getting started quick start tutorial beginner guide prerequisites"
+  },
+  {
+    "title": "Prerequisites",
+    "section": "Getting Started",
+    "url": "docs/getting-started.html#prerequisites",
+    "content": "cxClientId, cxClientSecret, cxApiSecret required before starting. Access to staging or production environment.",
+    "keywords": "prerequisites requirements setup before start"
+  },
+  {
+    "title": "Authentication Flow",
+    "section": "Getting Started",
+    "url": "docs/getting-started.html#authentication",
+    "content": "Three step authentication: get credentials, generate access token via POST /clientapi/generate-token with x-cx-client-id and x-cx-client-secret headers, use Bearer token in Authorization header.",
+    "keywords": "authentication auth token bearer login credentials headers"
+  },
+  {
+    "title": "Generate Access Token",
+    "section": "Getting Started",
+    "url": "docs/getting-started.html#step-2",
+    "content": "POST /clientapi/generate-token. Exchange cxClientId and cxClientSecret for Bearer token. Token expires in 1 hour. Previous tokens are revoked.",
+    "keywords": "generate token access token post generate-token bearer expires"
+  },
+  {
+    "title": "Your First API Call",
+    "section": "Getting Started",
+    "url": "docs/getting-started.html#first-api-call",
+    "content": "Create a user example with curl, JavaScript fetch, and Node.js axios. POST /clientapi/users with Authorization and x-cx-api-secret headers.",
+    "keywords": "first api call example create user curl fetch axios"
+  },
+  {
+    "title": "API Reference",
+    "section": "API Reference",
+    "url": "docs/api.html",
+    "content": "Complete API reference for all Client Exchange API endpoints. Authentication, user management, credential rotation, error codes.",
+    "keywords": "api reference endpoints documentation"
+  },
+  {
+    "title": "Generate Access Token",
+    "section": "API Reference — Authentication",
+    "url": "docs/api.html#generate-token",
+    "content": "POST /clientapi/generate-token. Headers: x-cx-client-id, x-cx-client-secret. Returns accessToken, expiresIn (3600), expiresAt, tokenType Bearer. Error codes ER_401_101, ER_401_102, ERR_429_001.",
+    "keywords": "generate token post authentication headers response curl javascript axios"
+  },
+  {
+    "title": "Create Users (Batch)",
+    "section": "API Reference — Users",
+    "url": "docs/api.html#create-users",
+    "content": "POST /clientapi/users. Create one or more users. Required: userId, fullName, firstName, lastName, emailId, phoneNumber. Optional: countryCode, tier, branch, zone, region, status, endUserType, catalogueType, flex1-10, address. Headers: Authorization Bearer, x-cx-api-secret, Content-Type application/json. Returns results array with success/failure per user.",
+    "keywords": "create users batch post required fields optional flex address results duplicate"
+  },
+  {
+    "title": "User Fields Reference",
+    "section": "API Reference — Create Users",
+    "url": "docs/api.html#create-users",
+    "content": "userId string required, fullName string required, firstName string required, lastName string required, emailId string required, phoneNumber string required, countryCode tier branch zone region status endUserType catalogueType flex1-10 address object",
+    "keywords": "user fields schema types required optional"
+  },
+  {
+    "title": "Update Users (Batch)",
+    "section": "API Reference — Users",
+    "url": "docs/api.html#update-users",
+    "content": "PUT /clientapi/users. Update existing users. Partial update — only provided fields modified. Users identified by userId (externalUserId). Returns results with success/failure. Not found users return error.",
+    "keywords": "update users batch put partial modify fields results not found"
+  },
+  {
+    "title": "Get Users",
+    "section": "API Reference — Users",
+    "url": "docs/api.html#get-users",
+    "content": "GET /clientapi/users. Query params: page (default 1), limit (default 20, max 100), search (name email phone userId), userId (filter). Returns users array with full user data including totalPoints, createdAt, updatedAt. Pagination object with total, page, limit, totalPages.",
+    "keywords": "get users list retrieve search pagination query parameters page limit"
+  },
+  {
+    "title": "Error Codes Reference",
+    "section": "API Reference",
+    "url": "docs/api.html#error-codes",
+    "content": "Authentication errors ER_401_101 ER_401_102 ER_401_103 ER_403_001. Rate limiting ERR_429_001. Validation errors ER_400_001 ER_400_002 ER_400_003 ER_400_004. Server errors ER_500_001.",
+    "keywords": "error codes http status authentication validation rate limit server"
+  },
+  {
+    "title": "Integration Guides",
+    "section": "Guides",
+    "url": "docs/guides.html",
+    "content": "Best practices and patterns for production integration. Token management, error handling, rate limiting, batch operations, security, retry strategy.",
+    "keywords": "guides integration best practices patterns production"
+  },
+  {
+    "title": "Token Management",
+    "section": "Guides",
+    "url": "docs/guides.html#token-management",
+    "content": "Cache access tokens and refresh before expiry. TokenManager class pattern with getToken and invalidate methods. 5-minute buffer before expiry.",
+    "keywords": "token management cache refresh expiry tokenmanager"
+  },
+  {
+    "title": "Error Handling",
+    "section": "Guides",
+    "url": "docs/guides.html#error-handling",
+    "content": "Handle structured error responses. Check HTTP status and error code. Auto-retry on 401 with token refresh. Handle partial failures in batch operations. Inspect results array.",
+    "keywords": "error handling retry 401 partial failure results"
+  },
+  {
+    "title": "Rate Limiting",
+    "section": "Guides",
+    "url": "docs/guides.html#rate-limiting",
+    "content": "429 Too Many Requests. ERR_429_001. Retry-After header. Exponential backoff with jitter. Use batch endpoints. Queue requests.",
+    "keywords": "rate limiting 429 retry after backoff throttle"
+  },
+  {
+    "title": "Batch Operations",
+    "section": "Guides",
+    "url": "docs/guides.html#batch-operations",
+    "content": "Send multiple users in single request. Chunk large datasets. CHUNK_SIZE 50. Delay between chunks for rate limits.",
+    "keywords": "batch operations chunk bulk create update large datasets"
+  },
+  {
+    "title": "Security Best Practices",
+    "section": "Guides",
+    "url": "docs/guides.html#security",
+    "content": "Store secrets securely. Environment variables. IP whitelisting. HTTPS only. Rotate credentials periodically. Never expose credentials in client-side code. Server-to-server only.",
+    "keywords": "security secrets environment variables ip whitelisting https credentials"
+  },
+  {
+    "title": "Retry Strategy",
+    "section": "Guides",
+    "url": "docs/guides.html#retry-strategy",
+    "content": "Exponential backoff with jitter. Retry on 429 and 500 errors. withRetry function pattern. Max retries configurable.",
+    "keywords": "retry strategy backoff jitter exponential resilient"
+  }
+]

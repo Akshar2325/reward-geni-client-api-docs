@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getting Started — Reward Geni API</title>
+    <meta name="description" content="Quick start guide for the Reward Geni Client Exchange API. Learn how to authenticate and make your first API call.">
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="../index.html" class="logo-link">
+                <img src="../assets/logo.svg" alt="Reward Geni" class="logo">
+                <span class="logo-text">Reward Geni</span>
+            </a>
+            <button class="sidebar-close" id="sidebarClose" aria-label="Close sidebar">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="nav-section">
+                <h3 class="nav-section-title">Getting Started</h3>
+                <ul class="nav-list">
+                    <li><a href="../index.html" class="nav-link">Overview</a></li>
+                    <li><a href="getting-started.html" class="nav-link active">Quick Start</a></li>
+                    <li><a href="getting-started.html#authentication" class="nav-link">Authentication</a></li>
+                </ul>
+            </div>
+            <div class="nav-section">
+                <h3 class="nav-section-title">API Reference</h3>
+                <ul class="nav-list">
+                    <li><a href="api.html" class="nav-link">Overview</a></li>
+                    <li><a href="api.html#generate-token" class="nav-link">Generate Token</a></li>
+                    <li><a href="api.html#create-users" class="nav-link">Create Users</a></li>
+                    <li><a href="api.html#update-users" class="nav-link">Update Users</a></li>
+                    <li><a href="api.html#get-users" class="nav-link">Get Users</a></li>
+                </ul>
+            </div>
+            <div class="nav-section">
+                <h3 class="nav-section-title">Guides</h3>
+                <ul class="nav-list">
+                    <li><a href="guides.html" class="nav-link">Integration Guide</a></li>
+                    <li><a href="guides.html#error-handling" class="nav-link">Error Handling</a></li>
+                    <li><a href="guides.html#rate-limiting" class="nav-link">Rate Limiting</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="sidebar-footer">
+            <span class="version-badge">v1.0.0</span>
+        </div>
+    </aside>
+
+    <!-- Main -->
+    <div class="main-wrapper">
+        <header class="topbar">
+            <button class="menu-toggle" id="menuToggle" aria-label="Open sidebar">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+            </button>
+            <div class="search-container">
+                <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                <input type="text" id="searchInput" class="search-input" placeholder="Search documentation..." autocomplete="off">
+                <div class="search-results" id="searchResults"></div>
+            </div>
+            <div class="topbar-actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                    <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                </button>
+                <a href="https://github.com" class="github-link" target="_blank" rel="noopener" aria-label="GitHub">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                </a>
+            </div>
+        </header>
+
+        <main class="content">
+            <h1>Getting Started</h1>
+            <p>Get up and running with the Reward Geni Client Exchange API in minutes. This guide walks you through authentication and making your first API call.</p>
+
+            <h2 id="prerequisites">Prerequisites <a href="#prerequisites" class="anchor-link">#</a></h2>
+            <p>Before you begin, make sure you have the following:</p>
+            <ul class="step-list" style="list-style:disc;padding-left:24px;margin-bottom:20px;color:var(--text-secondary);">
+                <li style="margin-bottom:8px;">Your <code>cxClientId</code> — provided when your client account is created</li>
+                <li style="margin-bottom:8px;">Your <code>cxClientSecret</code> — shown only once at creation time</li>
+                <li style="margin-bottom:8px;">Your <code>cxApiSecret</code> — secondary secret for server-to-server calls</li>
+                <li style="margin-bottom:8px;">Access to the staging or production environment</li>
+            </ul>
+
+            <div class="callout callout-warning">
+                <div class="callout-icon">⚠️</div>
+                <div class="callout-content">
+                    <strong>Store credentials securely.</strong> The <code>cxClientSecret</code> and <code>cxApiSecret</code> are shown <strong>only once</strong> when your account is created. If lost, they must be rotated by a super admin.
+                </div>
+            </div>
+
+            <h2 id="authentication">Authentication Flow <a href="#authentication" class="anchor-link">#</a></h2>
+            <p>The API uses a two-step authentication process:</p>
+
+            <ol class="steps">
+                <li class="step">
+                    <h3 id="step-1">Get Your Credentials</h3>
+                    <p>When your client account is created, the Reward Geni admin receives:</p>
+                    <div class="table-wrapper">
+                        <table class="api-table">
+                            <thead>
+                                <tr><th>Field</th><th>Description</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><code>cxClientId</code></td><td>Your Client Exchange ID (public identifier)</td></tr>
+                                <tr><td><code>cxClientSecret</code></td><td>Your Client Exchange Secret (shown once only)</td></tr>
+                                <tr><td><code>cxApiSecret</code></td><td>Secondary secret for server-to-server operations</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </li>
+                <li class="step">
+                    <h3 id="step-2">Generate an Access Token</h3>
+                    <p>Exchange your credentials for a short-lived Bearer token (1 hour TTL).</p>
+                    <div class="endpoint-block">
+                        <div class="endpoint-header">
+                            <span class="method-badge method-post">POST</span>
+                            <span class="endpoint-url">/clientapi/generate-token</span>
+                        </div>
+                        <div class="endpoint-body">
+                            <p>Send your <code>cxClientId</code> and <code>cxClientSecret</code> as headers:</p>
+                            <div class="code-block">
+                                <div class="code-header">
+                                    <span class="code-lang">Headers</span>
+                                    <button class="copy-btn">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                                        Copy
+                                    </button>
+                                </div>
+                                <pre><code>x-cx-client-id: &lt;your-cxClientId&gt;
+x-cx-client-secret: &lt;your-cxClientSecret&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <p>Example using different tools:</p>
+                    <div class="code-tabs">
+                        <div class="code-tabs-header">
+                            <button class="code-tab-btn active">cURL</button>
+                            <button class="code-tab-btn">JavaScript Fetch</button>
+                            <button class="code-tab-btn">Node.js Axios</button>
+                        </div>
+                        <div class="code-tab-content active">
+                            <div class="code-block">
+                                <div class="code-header">
+                                    <span class="code-lang">cURL</span>
+                                    <button class="copy-btn">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                                        Copy
+                                    </button>
+                                </div>
+                                <pre><code>curl -X POST https://staging.rewardgenix.co.in/clientapi/generate-token \
+  -H "x-cx-client-id: YOUR_CLIENT_ID" \
+  -H "x-cx-client-secret: YOUR_CLIENT_SECRET"</code></pre>
+                            </div>
+                        </div>
+                        <div class="code-tab-content">
+                            <div class="code-block">
+                                <div class="code-header">
+                                    <span class="code-lang">JavaScript</span>
+                                    <button class="copy-btn">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                                        Copy
+                                    </button>
+                                </div>
+                                <pre><code>const response = await fetch('https://staging.rewardgenix.co.in/clientapi/generate-token', {
+  method: 'POST',
+  headers: {
+    'x-cx-client-id': 'YOUR_CLIENT_ID',
+    'x-cx-client-secret': 'YOUR_CLIENT_SECRET'
+  }
+});
+
+const data = await response.json();
+console.log('Access Token:', data.data.accessToken);</code></pre>
+                            </div>
+                        </div>
+                        <div class="code-tab-content">
+                            <div class="code-block">
+                                <div class="code-header">
+                                    <span class="code-lang">Node.js</span>
+                                    <button class="copy-btn">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                                        Copy
+                                    </button>
+                                </div>
+                                <pre><code>const axios = require('axios');
+
+const response = await axios.post(
+  'https://staging.rewardgenix.co.in/clientapi/generate-token',
+  {},
+  {
+    headers: {
+      'x-cx-client-id': 'YOUR_CLIENT_ID',
+      'x-cx-client-secret': 'YOUR_CLIENT_SECRET'
+    }
+  }
+);
+
+console.log('Access Token:', response.data.data.accessToken);</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <p>Success response:</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">JSON</span>
+                            <button class="copy-btn">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                                Copy
+                            </button>
+                        </div>
+                        <pre><code>{
+  "message": "Access token generated successfully",
+  "data": {
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+    "expiresIn": 3600,
+    "expiresAt": "2025-01-01T13:00:00.000Z",
+    "tokenType": "Bearer"
+  }
+}</code></pre>
+                    </div>
+                    <div class="callout callout-info">
+                        <div class="callout-icon">ℹ️</div>
+                        <div class="callout-content">
+                            <strong>Token rotation:</strong> Any previously active token for the same client is automatically revoked when a new one is generated.
+                        </div>
+                    </div>
+                </li>
+                <li class="step">
+                    <h3 id="step-3">Use the Token in API Calls</h3>
+                    <p>Include the Bearer token in the <code>Authorization</code> header for all subsequent requests:</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Header</span>
+                            <button class="copy-btn" data-code="Authorization: Bearer <accessToken>">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                                Copy
+                            </button>
+                        </div>
+                        <pre><code>Authorization: Bearer &lt;accessToken&gt;</code></pre>
+                    </div>
+                </li>
+            </ol>
+
+            <h2 id="first-api-call">Your First API Call <a href="#first-api-call" class="anchor-link">#</a></h2>
+            <p>Once you have an access token, try creating a user:</p>
+
+            <div class="code-tabs">
+                <div class="code-tabs-header">
+                    <button class="code-tab-btn active">cURL</button>
+                    <button class="code-tab-btn">JavaScript Fetch</button>
+                    <button class="code-tab-btn">Node.js Axios</button>
+                </div>
+                <div class="code-tab-content active">
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">cURL</span>
+                            <button class="copy-btn">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                                Copy
+                            </button>
+                        </div>
+                        <pre><code>curl -X POST https://staging.rewardgenix.co.in/clientapi/users \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
+  -H "x-cx-api-secret: YOUR_API_SECRET" \
+  -d '{
+    "users": [{
+      "userId": "EMP001",
+      "fullName": "John Doe",
+      "firstName": "John",
+      "lastName": "Doe",
+      "emailId": "john.doe@example.com",
+      "phoneNumber": "9876543210"
+    }]
+  }'</code></pre>
+                    </div>
+                </div>
+                <div class="code-tab-content">
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">JavaScript</span>
+                            <button class="copy-btn">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                                Copy
+                            </button>
+                        </div>
+                        <pre><code>const response = await fetch('https://staging.rewardgenix.co.in/clientapi/users', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer YOUR_ACCESS_TOKEN',
+    'x-cx-api-secret': 'YOUR_API_SECRET'
+  },
+  body: JSON.stringify({
+    users: [{
+      userId: 'EMP001',
+      fullName: 'John Doe',
+      firstName: 'John',
+      lastName: 'Doe',
+      emailId: 'john.doe@example.com',
+      phoneNumber: '9876543210'
+    }]
+  })
+});
+
+const result = await response.json();
+console.log(result);</code></pre>
+                    </div>
+                </div>
+                <div class="code-tab-content">
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Node.js</span>
+                            <button class="copy-btn">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                                Copy
+                            </button>
+                        </div>
+                        <pre><code>const axios = require('axios');
+
+const response = await axios.post(
+  'https://staging.rewardgenix.co.in/clientapi/users',
+  {
+    users: [{
+      userId: 'EMP001',
+      fullName: 'John Doe',
+      firstName: 'John',
+      lastName: 'Doe',
+      emailId: 'john.doe@example.com',
+      phoneNumber: '9876543210'
+    }]
+  },
+  {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer YOUR_ACCESS_TOKEN',
+      'x-cx-api-secret': 'YOUR_API_SECRET'
+    }
+  }
+);
+
+console.log(response.data);</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <h2 id="next-steps">Next Steps <a href="#next-steps" class="anchor-link">#</a></h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>API Reference</h3>
+                    <p>Explore all available endpoints, request/response formats, and error codes.</p>
+                    <a href="api.html" class="feature-link">View API Reference →</a>
+                </div>
+                <div class="feature-card">
+                    <h3>Integration Guide</h3>
+                    <p>Learn best practices for error handling, rate limiting, and production integration.</p>
+                    <a href="guides.html" class="feature-link">Read Guides →</a>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <p>&copy; 2025 Reward Geni. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="../index.html">Home</a>
+                    <a href="api.html">API Reference</a>
+                    <a href="guides.html">Guides</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <script src="../config.js"></script>
+    <script src="../script.js"></script>
+</body>
+</html>

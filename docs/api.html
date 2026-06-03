@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Reference — Reward Geni API</title>
+    <meta name="description" content="Complete API reference for the Reward Geni Client Exchange API. Endpoints for authentication, user management, and more.">
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="../index.html" class="logo-link">
+                <img src="../assets/logo.svg" alt="Reward Geni" class="logo">
+                <span class="logo-text">Reward Geni</span>
+            </a>
+            <button class="sidebar-close" id="sidebarClose" aria-label="Close sidebar">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="nav-section">
+                <h3 class="nav-section-title">Getting Started</h3>
+                <ul class="nav-list">
+                    <li><a href="../index.html" class="nav-link">Overview</a></li>
+                    <li><a href="getting-started.html" class="nav-link">Quick Start</a></li>
+                    <li><a href="getting-started.html#authentication" class="nav-link">Authentication</a></li>
+                </ul>
+            </div>
+            <div class="nav-section">
+                <h3 class="nav-section-title">API Reference</h3>
+                <ul class="nav-list">
+                    <li><a href="api.html" class="nav-link active">Overview</a></li>
+                    <li><a href="api.html#generate-token" class="nav-link">Generate Token</a></li>
+                    <li><a href="api.html#create-users" class="nav-link">Create Users</a></li>
+                    <li><a href="api.html#update-users" class="nav-link">Update Users</a></li>
+                    <li><a href="api.html#get-users" class="nav-link">Get Users</a></li>
+                </ul>
+            </div>
+            <div class="nav-section">
+                <h3 class="nav-section-title">Guides</h3>
+                <ul class="nav-list">
+                    <li><a href="guides.html" class="nav-link">Integration Guide</a></li>
+                    <li><a href="guides.html#error-handling" class="nav-link">Error Handling</a></li>
+                    <li><a href="guides.html#rate-limiting" class="nav-link">Rate Limiting</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="sidebar-footer">
+            <span class="version-badge">v1.0.0</span>
+        </div>
+    </aside>
+
+    <div class="main-wrapper">
+        <header class="topbar">
+            <button class="menu-toggle" id="menuToggle" aria-label="Open sidebar">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+            </button>
+            <div class="search-container">
+                <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                <input type="text" id="searchInput" class="search-input" placeholder="Search documentation..." autocomplete="off">
+                <div class="search-results" id="searchResults"></div>
+            </div>
+            <div class="topbar-actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                    <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                </button>
+                <a href="https://github.com" class="github-link" target="_blank" rel="noopener" aria-label="GitHub">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                </a>
+            </div>
+        </header>
+
+        <main class="content">
+            <h1>API Reference</h1>
+            <p>Complete reference for all Client Exchange API endpoints. Base URL: <code>https://staging.rewardgenix.co.in</code></p>
+
+            <!-- Table of Contents -->
+            <div class="content-section">
+                <h2 id="toc">On This Page <a href="#toc" class="anchor-link">#</a></h2>
+                <ul style="list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;">
+                    <li><a href="#generate-token" class="nav-link">🔐 Generate Access Token</a></li>
+                    <li><a href="#create-users" class="nav-link">👤 Create Users (Batch)</a></li>
+                    <li><a href="#update-users" class="nav-link">✏️ Update Users (Batch)</a></li>
+                    <li><a href="#get-users" class="nav-link">📋 Get Users</a></li>
+                    <li><a href="#error-codes" class="nav-link">❌ Error Codes</a></li>
+                </ul>
+            </div>
+
+            <!-- ==================== GENERATE TOKEN ==================== -->
+            <section class="content-section">
+                <h2 id="generate-token">Generate Access Token <a href="#generate-token" class="anchor-link">#</a></h2>
+                <div class="endpoint-block">
+                    <div class="endpoint-header">
+                        <span class="method-badge method-post">POST</span>
+                        <span class="endpoint-url">/clientapi/generate-token</span>
+                    </div>
+                    <div class="endpoint-body">
+                        <p class="endpoint-description">Exchange your <code>cxClientId</code> and <code>cxClientSecret</code> for a short-lived Bearer token (1 hour). Any previously active token for the same client is automatically revoked.</p>
+
+                        <h4>Headers</h4>
+                        <div class="table-wrapper">
+                            <table class="api-table">
+                                <thead><tr><th>Header</th><th>Required</th><th>Description</th></tr></thead>
+                                <tbody>
+                                    <tr><td><code>x-cx-client-id</code></td><td>Yes</td><td>Your Client Exchange ID</td></tr>
+                                    <tr><td><code>x-cx-client-secret</code></td><td>Yes</td><td>Your Client Exchange Secret</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h4>Code Examples</h4>
+                        <div class="code-tabs">
+                            <div class="code-tabs-header">
+                                <button class="code-tab-btn active">cURL</button>
+                                <button class="code-tab-btn">JavaScript Fetch</button>
+                                <button class="code-tab-btn">Node.js Axios</button>
+                            </div>
+                            <div class="code-tab-content active">
+                                <div class="code-block">
+                                    <div class="code-header"><span class="code-lang">cURL</span><button class="copy-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button></div>
+                                    <pre><code>curl -X POST https://staging.rewardgenix.co.in/clientapi/generate-token \
+  -H "x-cx-client-id: YOUR_CLIENT_ID" \
+  -H "x-cx-client-secret: YOUR_CLIENT_SECRET"</code></pre>
+                                </div>
+                            </div>
+                            <div class="code-tab-content">
+                                <div class="code-block">
+                                    <div class="code-header"><span class="code-lang">JavaScript</span><button class="copy-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button></div>
+                                    <pre><code>const response = await fetch('https://staging.rewardgenix.co.in/clientapi/generate-token', {
+  method: 'POST',
+  headers: {
+    'x-cx-client-id': 'YOUR_CLIENT_ID',
+    'x-cx-client-secret': 'YOUR_CLIENT_SECRET'
+  }
+});
+
+const { data } = await response.json();
+const { accessToken, expiresIn, expiresAt } = data;</code></pre>
+                                </div>
+                            </div>
+                            <div class="code-tab-content">
+                                <div class="code-block">
+                                    <div class="code-header"><span class="code-lang">Node.js</span><button class="copy-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button></div>
+                                    <pre><code>const axios = require('axios');
+
+const { data } = await axios.post(
+  'https://staging.rewardgenix.co.in/clientapi/generate-token',
+  {},
+  {
+    headers: {
+      'x-cx-client-id': 'YOUR_CLIENT_ID',
+      'x-cx-client-secret': 'YOUR_CLIENT_SECRET'
+    }
+  }
+);
+
+const token = data.data.accessToken;</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h4>Response — 200 OK</h4>
+                        <div class="code-block">
+                            <div class="code-header"><span class="code-lang">JSON</span><button class="copy-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button></div>
+                            <pre><code>{
+  "message": "Access token generated successfully",
+  "data": {
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+    "expiresIn": 3600,
+    "expiresAt": "2025-01-01T13:00:00.000Z",
+    "tokenType": "Bearer"
+  }
+}</code></pre>
+                        </div>
+
+                        <h4>Error Responses</h4>
+                        <div class="table-wrapper">
+                            <table class="api-table">
+                                <thead><tr><th>Status</th><th>Code</th><th>Description</th></tr></thead>
+                                <tbody>
+                                    <tr><td>401</td><td><code>ER_401_101</code></td><td>Invalid cxClientId or cxClientSecret</td></tr>
+                                    <tr><td>401</td><td><code>ER_401_102</code></td><td>Missing x-cx-client-id or x-cx-client-secret headers</td></tr>
+                                    <tr><td>429</td><td><code>ERR_429_001</code></td><td>Rate limit exceeded</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== CREATE USERS ==================== -->
+            <section class="content-section">
+                <h2 id="create-users">Create Users (Batch) <a href="#create-users" class="anchor-link">#</a></h2>
+                <div class="endpoint-block">
+                    <div class="endpoint-header">
+                        <span class="method-badge method-post">POST</span>
+                        <span class="endpoint-url">/clientapi/users</span>
+                    </div>
+                    <div class="endpoint-body">
+                        <p class="endpoint-description">Create one or more end users in a single request. Duplicate <code>userId</code> or <code>emailId</code> entries are skipped with an error in the results array.</p>
+
+                        <h4>Headers</h4>
+                        <div class="table-wrapper">
+                            <table class="api-table">
+                                <thead><tr><th>Header</th><th>Required</th><th>Description</th></tr></thead>
+                                <tbody>
+                                    <tr><td><code>Authorization</code></td><td>Yes</td><td><code>Bearer &lt;accessToken&gt;</code></td></tr>
+                                    <tr><td><code>x-cx-api-secret</code></td><td>Yes</td><td>Your API Secret</td></tr>
+                                    <tr><td><code>Content-Type</code></td><td>Yes</td><td><code>application/json</code></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h4>Required Fields</h4>
+                        <p><code>userId</code>, <code>fullName</code>, <code>firstName</code>, <code>lastName</code>, <code>emailId</code>, <code>phoneNumber</code></p>
+
+                        <h4>Request Body</h4>
+                        <div class="code-block">
+                            <div class="code-header"><span class="code-lang">JSON</span><button class="copy-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button></div>
+                            <pre><code>{
+  "users": [
+    {
+      "userId": "EMP001",
+      "fullName": "John Doe",
+      "firstName": "John",
+      "lastName": "Doe",
+      "emailId": "john.doe@example.com",
+      "phoneNumber": "9876543210",
+      "countryCode": "+91",
+      "tier": "Gold",
+      "branch": "Mumbai HQ",
+      "zone": "West",
+      "region": "Maharashtra",
+      "memberType": "Employee",
+      "status": "ACTIVE",
+      "redemptionStatus": "ENABLED",
+      "panAvailable": "YES",
+      "endUserType": "EMPLOYEE",
+      "catalogueType": "STANDARD",
+      "flex1": "Engineering",
+      "flex2": "Team Alpha",
+      "flex3": "Senior Manager",
+      "flex4": "Shift A",
+      "flex5": "Remote",
+      "flex6": "Tenure 5y",
+      "flex7": "Referral Bonus",
+      "flex8": "Skill Allowance",
+      "flex9": "Travel Reimburse",
+      "flex10": "Special Grant",
+      "address": {
+        "addressLine1": "123 Main Street",
+        "addressLine2": "Apt 4B",
+        "city": "Mumbai",
+        "state": "Maharashtra",
+        "pincode": "400001"
+      }
+    }
+  ]
+}</code></pre>
+                        </div>
+
+                        <h4>User Fields Reference</h4>
+                        <div class="table-wrapper">
+                            <table class="api-table">
+                                <thead><tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+                                <tbody>
+                                    <tr><td><code>userId</code></td><td>string</td><td>Yes</td><td>External user identifier (unique)</td></tr>
+                                    <tr><td><code>fullName</code></td><td>string</td><td>Yes</td><td>Full name of the user</td></tr>
+                                    <tr><td><code>firstName</code></td><td>string</td><td>Yes</td><td>First name</td></tr>
+                                    <tr><td><code>lastName</code></td><td>string</td><td>Yes</td><td>Last name</td></tr>
+                                    <tr><td><code>emailId</code></td><td>string</td><td>Yes</td><td>Email address (unique)</td></tr>
+                                    <tr><td><code>phoneNumber</code></td><td>string</td><td>Yes</td><td>Phone number</td></tr>
+                                    <tr><td><code>countryCode</code></td><td>string</td><td>No</td><td>Country code (e.g. +91)</td></tr>
+                                    <tr><td><code>tier</code></td><td>string</td><td>No</td><td>User tier (e.g. Gold, Silver)</td></tr>
+                                    <tr><td><code>branch</code></td><td>string</td><td>No</td><td>Branch name</td></tr>
+                                    <tr><td><code>zone</code></td><td>string</td><td>No</td><td>Zone</td></tr>
+                                    <tr><td><code>region</code></td><td>string</td><td>No</td><td>Region</td></tr>
+                                    <tr><td><code>status</code></td><td>string</td><td>No</td><td>ACTIVE, INACTIVE, or SUSPENDED</td></tr>
+                                    <tr><td><code>endUserType</code></td><td>string</td><td>No</td><td>e.g. EMPLOYEE</td></tr>
+                                    <tr><td><code>catalogueType</code></td><td>string</td><td>No</td><td>STANDARD or PREMIUM</td></tr>
+                                    <tr><td><code>flex1</code>–<code>flex10</code></td><td>string</td><td>No</td><td>Custom flexible fields</td></tr>
+                                    <tr><td><code>address</code></td><td>object</td><td>No</td><td>Address with addressLine1/2, city, state, pincode</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h4>Code Examples</h4>
+                        <div class="code-tabs">
+                            <div class="code-tabs-header">
+                                <button class="code-tab-btn active">cURL</button>
+                                <button class="code-tab-btn">JavaScript Fetch</button>
+                                <button class="code-tab-btn">Node.js Axios</button>
+                            </div>
+                            <div class="code-tab-content active">
+                                <div class="code-block">
+                                    <div class="code-header"><span class="code-lang">cURL</span><button class="copy-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button></div>
+                                    <pre><code>curl -X POST https://staging.rewardgenix.co.in/clientapi/users \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
+  -H "x-cx-api-secret: YOUR_API_SECRET" \
+  -d '{
+    "users": [{
+      "userId": "EMP001",
+      "fullName": "John Doe",
+      "firstName": "John",
+      "lastName": "Doe",
+      "emailId": "john.doe@example.com",
+      "phoneNumber": "9876543210"
+    }]
+  }'</code></pre>
+                                </div>
+                            </div>
+                            <div class="code-tab-content">
+                                <div class="code-block">
+                                    <div class="code-header"><span class="code-lang">JavaScript</span><button class="copy-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button></div>
+                                    <pre><code>const response = await fetch('https://staging.rewardgenix.co.in/clientapi/users', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer YOUR_ACCESS_TOKEN',
+    'x-cx-api-secret': 'YOUR_API_SECRET'
+  },
+  body: JSON.stringify({
+    users: [{
+      userId: 'EMP001',
+      fullName: 'John Doe',
+      firstName: 'John',
+      lastName: 'Doe',
+      emailId: 'john.doe@example.com',
+      phoneNumber: '9876543210'
+    }]
+  })
+});
+
+const result = await response.json();
+console.log(result.message);</code></pre>
+                                </div>
+                            </div>
+                            <div class="code-tab-content">
+                                <div class="code-block">
+                                    <div class="code-header"><span class="code-lang">Node.js</span><button class="copy-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button></div>
+                                    <pre><code>const axios = require('axios');
+
+const { data } = await axios.post(
+  'https://staging.rewardgenix.co.in/clientapi/users',
+  {
+    users: [{
+      userId: 'EMP001',
+      fullName: 'John Doe',
+      firstName: 'John',
+      lastName: 'Doe',
+      emailId: 'john.doe@example.com',
+      phoneNumber: '9876543210'
+    }]
+  },
+  {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer YOUR_ACCESS_TOKEN',
+      'x-cx-api-secret': 'YOUR_API_SECRET'
+    }
+  }
+);
+
+data.data.results.forEach(r => {
+  console.log(r.userId, r.success ? '✓' : '✗ ' + r.error);
+});</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h4>Response — 201 Created (Success)</h4>
+                        <div class="code-block">
+                            <div class="code-header"><span class="code-lang">JSON</span><button class="copy-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button></div>
+                            <pre><code>{
+  "message": "Processed 2 users: 2 created, 0 failed",
+  "data": {
+    "results": [
+      { "userId": "EMP001", "success": true },
+      { "userId": "EMP002", "success": true }
+    ]
+  }
+}</code></pre>
+                        </div>
+
+                        <h4>Response — 201 Created (Partial Failure)</h4>
+                        <div class="code-block">
+                            <div class="code-header"><span class="code-lang">JSON</span><button class="copy-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button></div>
+                            <pre><code>{
+  "message": "Processed 3 users: 1 created, 2 failed",
+  "data": {
+    "results": [
+      { "userId": "EMP001", "success": true },
+      { "userId": "EMP002", "success": false, "error": "User with userId \"EMP002\" already exists" },
+      { "userId": "EMP003", "success": false, "error": "User with emailId \"existing@example.com\" already exists" }
+    ]
+  }
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== UPDATE USERS ==================== -->
+            <section class="content-section">
+                <h2 id="update-users">Update Users (Batch) <a href="#update-users" class="anchor-link">#</a></h2>
+                <div class="endpoint-block">
+                    <div class="endpoint-header">
+                        <span class="method-badge method-put">PUT</span>
+                        <span class="endpoint-url">/clientapi/users</span>
+                    </div>
+                    <div class="endpoint-body">
+                        <p class="endpoint-description">Update existing end users. Only provided fields are modified (partial update). Users are identified by their <code>userId</code> (externalUserId).</p>
+
+                        <h4>Headers</h4>
+                        <div class="table-wrapper">
+                            <table class="api-table">
+                                <thead><tr><th>Header</th><th>Required</th><th>Description</th></tr></thead>
+                                <tbody>
+                                    <tr><td><code>Authorization</code></td><td>Yes</td><td><code>Bearer &lt;accessToken&gt;</code></td></tr>
+                                    <tr><td><code>x-cx-api-secret</code></td><td>Yes</td><td>Your API Secret</td></tr>
+                                    <tr><td><code>Content-Type</code></td><td>Yes</td><td><code>application/json</code></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h4>Code Examples</h4>
+                        <div class="code-tabs">
+                            <div class="code-tabs-header">
+                                <button class="code-tab-btn active">cURL</button>
+                                <button class="code-tab-btn">JavaScript Fetch</button>
+                                <button class="code-tab-btn">Node.js Axios</button>
+                            </div>
+                            <div class="code-tab-content active">
+                                <div class="code-block">
+                                    <div class="code-header"><span class="code-lang">cURL</span><button class="copy-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button></div>
+                                    <pre><code>curl -X PUT https://staging.rewardgenix.co.in/clientapi/users \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
+  -H "x-cx-api-secret: YOUR_API_SECRET" \
+  -d '{
+    "users": [{
+      "userId": "EMP001",
+      "tier": "Platinum",
+      "branch": "Corporate HQ"
+    }]
+  }'</code></pre>
+                                </div>
+                            </div>
+                            <div class="code-tab-content">
+                                <div class="code-block">
+                                    <div class="code-header"><span class="code-lang">JavaScript</span><button class="copy-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button></div>
+                                    <pre><code>const response = await fetch('https://staging.rewardgenix.co.in/clientapi/users', {
+  method: 'PUT',
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer YOUR_ACCESS_TOKEN',
+    'x-cx-api-secret': 'YOUR_API_SECRET'
+  },
+  body: JSON.stringify({
+    users: [{
+      userId: 'EMP001',
+      tier: 'Platinum',
+      branch: 'Corporate HQ'
+    }]
+  })
+});
+
+const result = await response.json();</code></pre>
+                                </div>
+                            </div>
+                            <div class="code-tab-content">
+                                <div class="code-block">
+                                    <div class="code-header"><span class="code-lang">Node.js</span><button class="copy-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button></div>
+                                    <pre><code>const axios = require('axios');
+
+const { data } = await axios.put(
+  'https://staging.rewardgenix.co.in/clientapi/users',
+  {
+    users: [{
+      userId: 'EMP001',
+      tier: 'Platinum',
+      branch: 'Corporate HQ'
+    }]
+  },
+  {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer YOUR_ACCESS_TOKEN',
+      'x-cx-api-secret': 'YOUR_API_SECRET'
+    }
+  }
+);</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h4>Response — 200 OK (Success)</h4>
+                        <div class="code-block">
+                            <div class="code-header"><span class="code-lang">JSON</span><button class="copy-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button></div>
+                            <pre><code>{
+  "message": "Processed 1 users: 1 updated, 0 failed",
+  "data": {
+    "results": [
+      { "userId": "EMP001", "success": true }
+    ]
+  }
+}</code></pre>
+                        </div>
+
+                        <h4>Response — 200 OK (User Not Found)</h4>
+                        <div class="code-block">
+                            <div class="code-header"><span class="code-lang">JSON</span><button class="copy-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button></div>
+                            <pre><code>{
+  "message": "Processed 2 users: 1 updated, 1 failed",
+  "data": {
+    "results": [
+      { "userId": "EMP001", "success": true },
+      { "userId": "EMP999", "success": false, "error": "User with userId \"EMP999\" not found" }
+    ]
+  }
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== GET USERS ==================== -->
+            <section class="content-section">
+                <h2 id="get-users">Get Users <a href="#get-users" class="anchor-link">#</a></h2>
+                <div class="endpoint-block">
+                    <div class="endpoint-header">
+                        <span class="method-badge method-get">GET</span>
+                        <span class="endpoint-url">/clientapi/users</span>
+                    </div>
+                    <div class="endpoint-body">
+                        <p class="endpoint-description">Retrieve end users with pagination and search. Search across name, email, phone, or userId.</p>
+
+                        <h4>Headers</h4>
+                        <div class="table-wrapper">
+                            <table class="api-table">
+                                <thead><tr><th>Header</th><th>Required</th><th>Description</th></tr></thead>
+                                <tbody>
+                                    <tr><td><code>Authorization</code></td><td>Yes</td><td><code>Bearer &lt;accessToken&gt;</code></td></tr>
+                                    <tr><td><code>x-cx-api-secret</code></td><td>Yes</td><td>Your API Secret</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h4>Query Parameters</h4>
+                        <div class="table-wrapper">
+                            <table class="api-table">
+                                <thead><tr><th>Param</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+                                <tbody>
+                                    <tr><td><code>page</code></td><td>int</td><td>1</td><td>Page number</td></tr>
+                                    <tr><td><code>limit</code></td><td>int</td><td>20</td><td>Results per page (max: 100)</td></tr>
+                                    <tr><td><code>search</code></td><td>string</td><td>—</td><td>Search by name, email, phone, or userId</td></tr>
+                                    <tr><td><code>userId</code></td><td>string</td><td>—</td><td>Filter by specific externalUserId</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h4>Code Examples</h4>
+                        <div class="code-tabs">
+                            <div class="code-tabs-header">
+                                <button class="code-tab-btn active">cURL</button>
+                                <button class="code-tab-btn">JavaScript Fetch</button>
+                                <button class="code-tab-btn">Node.js Axios</button>
+                            </div>
+                            <div class="code-tab-content active">
+                                <div class="code-block">
+                                    <div class="code-header"><span class="code-lang">cURL</span><button class="copy-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button></div>
+                                    <pre><code>curl -X GET "https://staging.rewardgenix.co.in/clientapi/users?page=1&limit=20&search=john" \
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
+  -H "x-cx-api-secret: YOUR_API_SECRET"</code></pre>
+                                </div>
+                            </div>
+                            <div class="code-tab-content">
+                                <div class="code-block">
+                                    <div class="code-header"><span class="code-lang">JavaScript</span><button class="copy-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button></div>
+                                    <pre><code>const params = new URLSearchParams({ page: 1, limit: 20, search: 'john' });
+
+const response = await fetch(
+  `https://staging.rewardgenix.co.in/clientapi/users?${params}`,
+  {
+    headers: {
+      'Authorization': 'Bearer YOUR_ACCESS_TOKEN',
+      'x-cx-api-secret': 'YOUR_API_SECRET'
+    }
+  }
+);
+
+const { data } = await response.json();
+console.log(`Found ${data.pagination.total} users`);</code></pre>
+                                </div>
+                            </div>
+                            <div class="code-tab-content">
+                                <div class="code-block">
+                                    <div class="code-header"><span class="code-lang">Node.js</span><button class="copy-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button></div>
+                                    <pre><code>const axios = require('axios');
+
+const { data } = await axios.get(
+  'https://staging.rewardgenix.co.in/clientapi/users',
+  {
+    params: { page: 1, limit: 20, search: 'john' },
+    headers: {
+      'Authorization': 'Bearer YOUR_ACCESS_TOKEN',
+      'x-cx-api-secret': 'YOUR_API_SECRET'
+    }
+  }
+);
+
+console.log(data.data.users);</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h4>Response — 200 OK</h4>
+                        <div class="code-block">
+                            <div class="code-header"><span class="code-lang">JSON</span><button class="copy-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button></div>
+                            <pre><code>{
+  "message": "Users retrieved successfully",
+  "data": {
+    "users": [
+      {
+        "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "externalUserId": "EMP001",
+        "fullName": "John Doe",
+        "firstName": "John",
+        "lastName": "Doe",
+        "emailId": "john.doe@example.com",
+        "phoneNumber": "9876543210",
+        "countryCode": "+91",
+        "tier": "Gold",
+        "branch": "Mumbai HQ",
+        "zone": "West",
+        "region": "Maharashtra",
+        "memberType": "Employee",
+        "status": "ACTIVE",
+        "userType": "EXTERNAL",
+        "redemptionStatus": "ENABLED",
+        "panAvailable": "YES",
+        "endUserType": "EMPLOYEE",
+        "catalogueType": "STANDARD",
+        "totalPoints": 1500,
+        "flex1": "Engineering",
+        "flex2": "Team Alpha",
+        "flex3": "Manager",
+        "flex4": "Shift A",
+        "flex5": "Location HQ",
+        "flex6": "Tenure 5y",
+        "flex7": "Referral Bonus",
+        "flex8": "Skill Allowance",
+        "flex9": "Travel Reimburse",
+        "flex10": "Special Grant",
+        "createdAt": "2025-01-01T12:00:00.000Z",
+        "updatedAt": "2025-06-01T10:30:00.000Z"
+      }
+    ],
+    "pagination": {
+      "total": 1,
+      "page": 1,
+      "limit": 20,
+      "totalPages": 1
+    }
+  }
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== ERROR CODES ==================== -->
+            <section class="content-section">
+                <h2 id="error-codes">Error Codes <a href="#error-codes" class="anchor-link">#</a></h2>
+
+                <h3 id="auth-errors">Authentication Errors</h3>
+                <div class="table-wrapper">
+                    <table class="api-table">
+                        <thead><tr><th>Code</th><th>HTTP</th><th>Description</th><th>Example</th></tr></thead>
+                        <tbody>
+                            <tr>
+                                <td><code>ER_401_101</code></td><td>401</td><td>Invalid or expired token</td>
+                                <td><code>{"message":"Invalid or expired token","status":"Error","code":"ER_401_101"}</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>ER_401_102</code></td><td>401</td><td>Missing or invalid client headers</td>
+                                <td><code>{"message":"Missing x-cx-client-id or x-cx-client-secret headers","status":"Error","code":"ER_401_102"}</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>ER_401_103</code></td><td>401</td><td>Invalid x-cx-api-secret</td>
+                                <td><code>{"message":"Invalid x-cx-api-secret","status":"Error","code":"ER_401_103"}</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>ER_403_001</code></td><td>403</td><td>IP not whitelisted</td>
+                                <td><code>{"message":"Access denied. IP not whitelisted.","status":"Error","code":"ER_403_001"}</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3 id="rate-errors">Rate Limiting</h3>
+                <div class="table-wrapper">
+                    <table class="api-table">
+                        <thead><tr><th>Code</th><th>HTTP</th><th>Description</th><th>Example</th></tr></thead>
+                        <tbody>
+                            <tr>
+                                <td><code>ERR_429_001</code></td><td>429</td><td>Rate limit exceeded</td>
+                                <td><code>{"message":"Rate limit exceeded. Please retry after 60 seconds.","status":"Error","code":"ERR_429_001"}</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3 id="validation-errors-ref">Validation Errors</h3>
+                <div class="table-wrapper">
+                    <table class="api-table">
+                        <thead><tr><th>Code</th><th>HTTP</th><th>Description</th><th>Example</th></tr></thead>
+                        <tbody>
+                            <tr>
+                                <td><code>ER_400_001</code></td><td>400</td><td>Missing required fields</td>
+                                <td><code>{"message":"Validation failed: userId is required","status":"Error","code":"ER_400_001"}</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>ER_400_002</code></td><td>400</td><td>Invalid field format</td>
+                                <td><code>{"message":"Validation failed: emailId must be a valid email","status":"Error","code":"ER_400_002"}</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>ER_400_003</code></td><td>400</td><td>Empty users array</td>
+                                <td><code>{"message":"Validation failed: At least one user is required","status":"Error","code":"ER_400_003"}</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>ER_400_004</code></td><td>400</td><td>Unknown status value</td>
+                                <td><code>{"message":"Validation failed: status must be one of: ACTIVE, INACTIVE, SUSPENDED","status":"Error","code":"ER_400_004"}</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3 id="server-errors-ref">Server Errors</h3>
+                <div class="table-wrapper">
+                    <table class="api-table">
+                        <thead><tr><th>Code</th><th>HTTP</th><th>Description</th><th>Example</th></tr></thead>
+                        <tbody>
+                            <tr>
+                                <td><code>ER_500_001</code></td><td>500</td><td>Internal server error</td>
+                                <td><code>{"message":"An unexpected error occurred","status":"Error","code":"ER_500_001"}</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <p>&copy; 2025 Reward Geni. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="../index.html">Home</a>
+                    <a href="getting-started.html">Getting Started</a>
+                    <a href="guides.html">Guides</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <script src="../config.js"></script>
+    <script src="../script.js"></script>
+</body>
+</html>
