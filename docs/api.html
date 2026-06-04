@@ -94,7 +94,7 @@
                     </svg>
                 </button>
                 <button type="button" class="btn btn-primary postman-download"
-                    data-download-url="../Reward%20Geni%20-%20Client%27s%20Users%20Creation%20API%20%28Part%20A%29.postman_collection"
+                    data-download-url="../part-a-client-exchange-api.json"
                     data-download-filename="reward-geni-client-exchange-api-part-a.postman_collection.json"
                     aria-label="Download Postman Collection">Download Postman Collection</button>
             </div>
@@ -347,12 +347,12 @@ const token = data.data.accessToken;</code></pre>
       "branch": "Mumbai HQ",
       "zone": "West",
       "region": "Maharashtra",
-      "memberType": "Employee",
-      "status": "ACTIVE",
-      "redemptionStatus": "ENABLED",
-      "panAvailable": "YES",
+      "memberType": "Employee",                                // Employee, Manager, etc.
+      "status": "ACTIVE",                                        // Allowed: ACTIVE, OFFLINE
+      "redemptionStatus": "ENABLED",                             // Allowed: ENABLED, DISABLED
+      "panAvailable": "YES",                                      // Allowed: YES, NO
       "endUserType": "EMPLOYEE",
-      "catalogueType": "STANDARD",
+      "catalogueType": "STANDARD",                              // STANDARD, PREMIUM, etc.
       "flex1": "Engineering",
       "flex2": "Team Alpha",
       "flex3": "Senior Manager",
@@ -454,10 +454,33 @@ const token = data.data.accessToken;</code></pre>
                                         <td>Region</td>
                                     </tr>
                                     <tr>
+                                        <td><code>memberType</code></td>
+                                        <td>string</td>
+                                        <td>No</td>
+                                        <td>Member type or category (e.g. Employee, Manager)</td>
+                                    </tr>
+                                    <tr>
                                         <td><code>status</code></td>
                                         <td>string</td>
                                         <td>No</td>
-                                        <td>ACTIVE, INACTIVE, or SUSPENDED</td>
+                                        <td>User membership status. Allowed values: <code>ACTIVE</code> /
+                                            <code>OFFLINE</code>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>redemptionStatus</code></td>
+                                        <td>string</td>
+                                        <td>No</td>
+                                        <td>Redemption eligibility. Allowed values: <code>ENABLED</code> /
+                                            <code>DISABLED</code>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>panAvailable</code></td>
+                                        <td>string</td>
+                                        <td>No</td>
+                                        <td>PAN card availability. Allowed values: <code>YES</code> / <code>NO</code>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td><code>endUserType</code></td>
@@ -1112,7 +1135,7 @@ console.log(data.data.users);</code></pre>
                                 <td><code>ER_400_004</code></td>
                                 <td>400</td>
                                 <td>Unknown status value</td>
-                                <td><code>{"message":"Validation failed: status must be one of: ACTIVE, INACTIVE, SUSPENDED","status":"Error","code":"ER_400_004"}</code>
+                                <td><code>{"message":"Validation failed: status must be one of: ACTIVE, OFFLINE","status":"Error","code":"ER_400_004"}</code>
                                 </td>
                             </tr>
                         </tbody>
